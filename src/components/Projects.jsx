@@ -44,7 +44,7 @@ const projects = [
     title: 'Watch Party App',
     description: 'Real-time watch party application where users can sync and watch videos together using WebSockets and React.',
     link: 'https://github.com/Biharinavnit/watch-party-',
-    live: 'https://watch-party-navnit.netlify.app/',
+    live: 'https://navnit-react-portfolio-5r16.vercel.app/',
     image: watchPartyImg,
     icon: <FaJs className="text-4xl text-pink-400 mb-3" />,
   },
