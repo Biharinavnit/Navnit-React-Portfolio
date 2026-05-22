@@ -14,7 +14,7 @@ const Hero = () => {
       {/* Left Text */}
       <div className="flex-1 z-10 text-center md:text-left">
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
-          Hi, I'm <span className="text-yellow-300">Navnit</span>
+          Hi, I'm <span className="text-yellow-300">Navnit Bihari</span>
         </h1>
 
         <h2 className="text-xl md:text-2xl text-blue-300 font-semibold mb-4">
