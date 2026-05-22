@@ -8,7 +8,7 @@ const About = () => {
           About Me
         </h2>
         <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-          I am <span className="font-semibold text-pink-400">Navnit</span>, a <span className="text-green-300 font-medium">Full Stack Developer</span> specializing in the <span className="text-orange-300 font-medium">MERN stack</span> (MongoDB, Express, React, Node.js), currently pursuing a <span className="text-blue-400 font-medium">B.Tech in Computer Science</span> at <span className="text-blue-400">Galgotias University</span>. I build scalable, high-performance, and visually engaging web applications using modern technologies and best coding practices.
+          I am <span className="font-semibold text-pink-400">Navnit Bihari</span>, a <span className="text-green-300 font-medium">Full Stack Developer</span> specializing in the <span className="text-orange-300 font-medium">MERN stack</span> (MongoDB, Express, React, Node.js), currently pursuing a <span className="text-blue-400 font-medium">B.Tech in Computer Science</span> at <span className="text-blue-400">Galgotias University</span>. I build scalable, high-performance, and visually engaging web applications using modern technologies and best coding practices.
         </p>
         <p className="text-gray-400 text-sm mt-4">
           My work emphasizes clean architecture, maintainable code, and user-focused design. I am committed to continuous learning and staying ahead with emerging tools and frameworks. My goal is to contribute to innovative projects that merge technical excellence with exceptional user experiences.
