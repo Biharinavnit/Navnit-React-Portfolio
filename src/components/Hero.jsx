@@ -1,4 +1,5 @@
 import React from 'react';
+import resumePdf from '../assets/Navnit_Resume.pdf';
 import profileImg from '../assets/profile.jpg';
 import { Typewriter } from 'react-simple-typewriter';
 
@@ -22,7 +23,8 @@ const Hero = () => {
             words={[
               'Full Stack Developer',
               'React Developer',
-              'MERN Developer'
+              'MERN Developer',
+              'Frontend Developer'
             ]}
             loop={true}
             cursor
@@ -35,7 +37,7 @@ const Hero = () => {
 
         {/* Resume Button */}
         <a
-          href="/Navnit_Resume.pdf"
+          href={resumePdf}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-2 px-6 py-3 bg-blue-400 hover:bg-orange-300 text-black font-semibold rounded-md shadow-lg transition duration-300"
@@ -45,7 +47,7 @@ const Hero = () => {
       </div>
 
       {/* Profile Image */}
-      <div className="flex-1 z-10 mt-10 md:mt-0 flex justify-center">
+      <div className="flex-1 z-10 mt-16 md:mt-10 flex justify-center">
         <img
           src={profileImg}
           alt="Profile"
