@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Sun, Moon } from 'lucide-react';
+import {
+  Menu,
+  Sun,
+  Moon,
+  House,
+  User,
+  FolderGit2,
+  Code2,
+  Mail,
+} from 'lucide-react';
 import { Link } from 'react-scroll';
 
 const Header = () => {
@@ -27,27 +36,34 @@ const Header = () => {
           />
 
           <h1 className="text-2xl font-extrabold text-white tracking-wide">
-            Navnit<span className="text-yellow-300">'s Portfolio</span>
+            Navnit<span className="text-yellow-300"> Portfolio</span>
           </h1>
         </div>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6 text-white font-medium tracking-wide">
-          {['about', 'projects', 'skills', 'contact'].map((id) => (
-            <li key={id}>
+          {[
+            { id: 'home', icon: <House size={18} />, label: 'Home' },
+            { id: 'about', icon: <User size={18} />, label: 'About' },
+            { id: 'projects', icon: <FolderGit2 size={18} />, label: 'Projects' },
+            { id: 'skills', icon: <Code2 size={18} />, label: 'Skills' },
+            { id: 'contact', icon: <Mail size={18} />, label: 'Contact' },
+          ].map((item) => (
+            <li key={item.id}>
               <Link
-                to={id}
+                to={item.id}
                 smooth={true}
-                duration={500}
+                duration={200}
                 spy={true}
                 offset={-70}
                 activeClass="text-yellow-300"
-                className="cursor-pointer relative px-2 py-1 transition duration-300
+                className="flex items-center gap-2 cursor-pointer relative px-2 py-1 transition duration-300
                 after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
-                after:bg-yellow-300 after:transition-all after:duration-300
+                after:bg-blue-300 after:transition-all after:duration-300
                 hover:after:w-full"
               >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {item.icon}
+                {item.label}
               </Link>
             </li>
           ))}
@@ -82,12 +98,12 @@ const Header = () => {
       {menuOpen && (
         <div className="md:hidden bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] text-white px-4 pb-4 border-t border-white/10">
           <ul className="flex flex-col gap-4 text-center">
-            {['about', 'projects', 'skills', 'contact'].map((id) => (
+            {['home', 'about', 'projects', 'skills', 'contact'].map((id) => (
               <li key={id}>
                 <Link
                   to={id}
                   smooth={true}
-                  duration={500}
+                  duration={200}
                   offset={-70}
                   onClick={() => setMenuOpen(false)}
                   className="block py-2 hover:text-yellow-300 cursor-pointer"
@@ -99,7 +115,6 @@ const Header = () => {
           </ul>
         </div>
       )}
-
     </header>
   );
 };

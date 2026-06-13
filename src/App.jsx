@@ -14,7 +14,7 @@ import ChatBot from './components/ChatBot';
 const App = () => {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 400,
       once: true,
     });
   }, []);

@@ -3,7 +3,7 @@ import developerImg from '../assets/developer.svg';
 
 const About = () => {
   return (
-   <section className="relative -mt-1 bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] py-20 px-5 overflow-hidden">
+   <section id="about" className="relative -mt-1 bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] py-20 px-5 overflow-hidden">
       {/* Glow Effects */}
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-500 opacity-30 rounded-full blur-3xl animate-pulse z-0" />
 

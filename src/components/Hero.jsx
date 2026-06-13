@@ -4,7 +4,7 @@ import profileImg from '../assets/profile.jpg';
 import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
-return ( <section className="relative flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-20 text-white overflow-hidden bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B]">
+return ( <section id ="home" className="relative flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-20 text-white overflow-hidden bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B]">
   {/* Glow Effects */}
   <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-500 opacity-30 rounded-full blur-3xl animate-pulse z-0"></div>
 
