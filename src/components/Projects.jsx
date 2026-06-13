@@ -36,7 +36,7 @@ const projects = [
     title: 'Doctor Appointment System',
     description: 'MERN stack project for booking and managing doctor appointments (Ongoing).',
     link: 'https://github.com/Biharinavnit',
-    live: 'https://medilux-doctor-booking-appointment-roan.vercel.app/',
+    live: 'https://medilux-doctor-appointment-booking.vercel.app/',
     image: doctorImg,
     icon: <FaUserMd className="text-4xl text-red-400 mb-3" />,
   },
