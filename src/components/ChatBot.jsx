@@ -105,7 +105,7 @@ const ChatBot = () => {
 
       {/* ✅ Chat Window */}
       {open && (
-        <div className="fixed bottom-20 right-6 w-80 bg-gray-900 text-white rounded-2xl shadow-2xl p-4 z-50 border border-gray-700 animate-fade-in">
+        <div className="fixed bottom-20 right-6 w-80 bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] text-white rounded-2xl shadow-2xl p-4 z-50 border border-white/10 animate-fade-in">
 
           {/* Header */}
           <div className="text-center mb-3">

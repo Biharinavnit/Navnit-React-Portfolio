@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './index.css';
 
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -11,7 +12,6 @@ import Contact from './components/Contact';
 import ChatBot from './components/ChatBot';
 
 const App = () => {
-  // Properly place useEffect inside the functional component
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -21,13 +21,15 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <div id="hero"><Hero /></div>
-      <div id="about"><About /></div>
-      <div id="projects"><Projects /></div>
-      <div id="skills"><Skills /></div>
-      <div id="contact"><Contact /></div>
-      <div id="chatbot"><ChatBot /></div>
+      <div>
+        <Header />
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Contact />
+        <ChatBot />
+      </div>
     </>
   );
 };

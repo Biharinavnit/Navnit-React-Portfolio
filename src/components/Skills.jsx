@@ -8,7 +8,7 @@ import {
   FaNodeJs,
   FaGitAlt,
   FaPython,
-  FaJava   // ✅ Added Java icon
+  FaJava
 } from 'react-icons/fa';
 import { SiMongodb, SiExpress } from 'react-icons/si';
 
@@ -21,7 +21,7 @@ const skillData = [
   { name: 'Express.js', icon: <SiExpress className="text-gray-300 text-2xl" /> },
   { name: 'MongoDB', icon: <SiMongodb className="text-green-600 text-2xl" /> },
   { name: 'Python', icon: <FaPython className="text-blue-400 text-2xl" /> },
-  { name: 'Java', icon: <FaJava className="text-red-500 text-2xl" /> }, // ✅ New Skill Added
+  { name: 'Java', icon: <FaJava className="text-red-500 text-2xl" /> },
   { name: 'Git', icon: <FaGitAlt className="text-red-500 text-2xl" /> },
 ];
 
@@ -55,10 +55,12 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8"
+      className="bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bold text-white mb-10 text-center">Skills</h2>
+        <h2 className="text-4xl font-bold text-white mb-10 text-center">
+          Skills
+        </h2>
 
         <motion.div
           className="flex flex-wrap justify-center gap-4"
@@ -69,6 +71,7 @@ const Skills = () => {
         >
           {skillData.map((skill, index) => {
             const isSelected = selectedSkills.includes(skill.name);
+
             return (
               <motion.button
                 key={index}

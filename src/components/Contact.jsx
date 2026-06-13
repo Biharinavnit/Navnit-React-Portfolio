@@ -30,7 +30,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8"
+      className="bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-white mb-10">Contact</h2>
@@ -68,7 +68,6 @@ const Contact = () => {
         {/* Status Message */}
         {status && <p className="text-green-400 mb-4">{status}</p>}
 
-        {/* 👇 YOUR ORIGINAL CODE (UNCHANGED) */}
         <div className="space-y-4 text-gray-300 text-lg">
           <p className="flex items-center justify-center gap-2">
             <Mail className="text-indigo-400 w-5 h-5" />
