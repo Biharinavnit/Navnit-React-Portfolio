@@ -1,70 +1,252 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
+/* Base reset */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Remove unwanted spacing */
-html,
-body,
-#root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-}
-
-/* Let react-scroll handle scrolling */
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: #090d1c;
 }
 
-/* Theme transition */
 body {
-  transition: background-color 0.3s, color 0.3s;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #090d1c;
+  color: #f8fafc;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Stars Background */
+#root {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.55);
+}
+
+/* Shared section background */
+.section-shell {
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 12% 15%,
+      rgba(91, 33, 182, 0.12),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 88% 85%,
+      rgba(79, 70, 229, 0.10),
+      transparent 38%
+    ),
+    linear-gradient(125deg, #0a0f20 0%, #101426 48%, #17132e 100%);
+}
+
+/* Ambient decorative glow */
+.ambient-glow {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(90px);
+}
+
+/* Glassmorphism cards */
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.065),
+    rgba(255, 255, 255, 0.025)
+  );
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Gradient text */
+.text-gradient {
+  color: #c4b5fd;
+  background: linear-gradient(100deg, #c4b5fd 0%, #e879f9 48%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Section headings */
+.section-eyebrow {
+  color: #c4b5fd;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+/* Primary and secondary buttons */
+.button-primary,
+.button-secondary {
+  min-height: 3rem;
+  border-radius: 0.9rem;
+  padding: 0.85rem 1.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.button-primary {
+  border: 1px solid rgba(196, 181, 253, 0.25);
+  color: #ffffff;
+  background: linear-gradient(110deg, #7c3aed, #6366f1);
+  box-shadow: 0 10px 30px rgba(109, 40, 217, 0.22);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(110deg, #8b5cf6, #818cf8);
+  box-shadow: 0 14px 35px rgba(109, 40, 217, 0.3);
+}
+
+.button-secondary {
+  border: 1px solid rgba(196, 181, 253, 0.25);
+  color: #e9d5ff;
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.button-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(196, 181, 253, 0.5);
+  background: rgba(139, 92, 246, 0.16);
+}
+
+/* Skill and technology badges */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(196, 181, 253, 0.16);
+  border-radius: 9999px;
+  padding: 0.4rem 0.75rem;
+  color: #ddd6fe;
+  background: rgba(139, 92, 246, 0.08);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Header active navigation link */
+.nav-active {
+  color: #c4b5fd !important;
+  background: rgba(139, 92, 246, 0.12);
+}
+
+/* Optional star field if used elsewhere in the app */
 .stars {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0b0220;
-  overflow: hidden;
+  inset: 0;
   z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #090d1c;
 }
 
 .stars::before,
 .stars::after {
-  content: "";
   position: absolute;
+  content: "";
   width: 2px;
   height: 2px;
+  border-radius: 50%;
   background: white;
   box-shadow:
-    100px 100px white,
-    300px 200px white,
-    500px 100px white,
-    700px 300px white,
-    900px 150px white,
-    1200px 400px white,
-    1500px 250px white;
-  animation: twinkle 4s infinite alternate;
+    100px 100px rgba(255, 255, 255, 0.7),
+    300px 200px rgba(255, 255, 255, 0.5),
+    500px 100px rgba(255, 255, 255, 0.7),
+    700px 300px rgba(255, 255, 255, 0.5),
+    900px 150px rgba(255, 255, 255, 0.6),
+    1200px 400px rgba(255, 255, 255, 0.7),
+    1500px 250px rgba(255, 255, 255, 0.5);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.stars::after {
+  transform: translate(40px, 60px);
+  animation-delay: 1.5s;
 }
 
 @keyframes twinkle {
   from {
-    opacity: 0.3;
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 380px) {
+  .section-title {
+    font-size: 2rem;
   }
 
-  to {
-    opacity: 1;
+  .glass-card {
+    border-radius: 1.15rem;
   }
 }

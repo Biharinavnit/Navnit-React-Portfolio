@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import {
   Menu,
@@ -8,107 +9,96 @@ import {
   FolderGit2,
   Code2,
   Mail,
+  X,
 } from 'lucide-react';
 import { Link } from 'react-scroll';
+
+const navItems = [
+  { id: 'home', label: 'Home', icon: House },
+  { id: 'about', label: 'About', icon: User },
+  { id: 'projects', label: 'Projects', icon: FolderGit2 },
+  { id: 'skills', label: 'Skills', icon: Code2 },
+  { id: 'contact', label: 'Contact', icon: Mail },
+];
 
 const Header = () => {
   const [dark, setDark] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', dark);
   }, [dark]);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-gradient-to-r from-[#0B1026]/95 via-[#111827]/95 to-[#1E1B4B]/95">
-      <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-
-        {/* Logo + Title */}
-        <div className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#090d1c]/85 text-white shadow-lg shadow-black/10 backdrop-blur-2xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#home" className="group flex min-w-0 items-center gap-3">
           <img
             src="/logo.svg"
-            alt="Logo"
-            className="w-10 h-10 md:w-12 md:h-12 hover:scale-110 transition duration-300"
+            alt="Portfolio logo"
+            className="h-10 w-10 shrink-0 rounded-xl object-contain transition duration-300 group-hover:scale-110 sm:h-12 sm:w-12"
           />
+          <span className="truncate text-xl font-extrabold tracking-tight sm:text-2xl">
+            Navnit <span className="text-gradient">Portfolio</span>
+          </span>
+        </a>
 
-          <h1 className="text-2xl font-extrabold text-white tracking-wide">
-            Navnit<span className="text-yellow-300"> Portfolio</span>
-          </h1>
-        </div>
-
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-6 text-white font-medium tracking-wide">
-          {[
-            { id: 'home', icon: <House size={18} />, label: 'Home' },
-            { id: 'about', icon: <User size={18} />, label: 'About' },
-            { id: 'projects', icon: <FolderGit2 size={18} />, label: 'Projects' },
-            { id: 'skills', icon: <Code2 size={18} />, label: 'Skills' },
-            { id: 'contact', icon: <Mail size={18} />, label: 'Contact' },
-          ].map((item) => (
-            <li key={item.id}>
+        <ul className="hidden items-center gap-1 lg:flex">
+          {navItems.map(({ id, label, icon: Icon }) => (
+            <li key={id}>
               <Link
-                to={item.id}
-                smooth={true}
-                duration={200}
-                spy={true}
-                offset={-70}
-                activeClass="text-yellow-300"
-                className="flex items-center gap-2 cursor-pointer relative px-2 py-1 transition duration-300
-                after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
-                after:bg-blue-300 after:transition-all after:duration-300
-                hover:after:w-full"
+                to={id}
+                smooth
+                duration={450}
+                spy
+                offset={-82}
+                activeClass="nav-active"
+                className="nav-link flex cursor-pointer items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-300 transition duration-300 hover:bg-white/[0.06] hover:text-white xl:px-4"
               >
-                {item.icon}
-                {item.label}
+                <Icon size={17} />
+                {label}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-4 text-white">
-
-          {/* Dark Mode Toggle */}
+        <div className="flex shrink-0 items-center gap-2">
           <button
-            onClick={() => setDark(!dark)}
-            className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"
+            type="button"
+            onClick={() => setDark((value) => !value)}
+            aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-amber-300 transition hover:border-violet-400/40 hover:bg-violet-500/15"
           >
-            {dark ? (
-              <Sun className="text-yellow-300" />
-            ) : (
-              <Moon />
-            )}
+            {dark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              <Menu />
-            </button>
-          </div>
-
+          <button
+            type="button"
+            onClick={() => setMenuOpen((value) => !value)}
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={menuOpen}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] transition hover:bg-violet-500/15 lg:hidden"
+          >
+            {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] text-white px-4 pb-4 border-t border-white/10">
-          <ul className="flex flex-col gap-4 text-center">
-            {['home', 'about', 'projects', 'skills', 'contact'].map((id) => (
+        <div className="border-t border-white/10 bg-[#0c1022]/95 px-4 py-4 backdrop-blur-2xl lg:hidden">
+          <ul className="mx-auto flex max-w-7xl flex-col gap-1">
+            {navItems.map(({ id, label, icon: Icon }) => (
               <li key={id}>
                 <Link
                   to={id}
-                  smooth={true}
-                  duration={200}
-                  offset={-70}
+                  smooth
+                  duration={450}
+                  offset={-78}
                   onClick={() => setMenuOpen(false)}
-                  className="block py-2 hover:text-yellow-300 cursor-pointer"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-slate-200 transition hover:bg-violet-500/15 hover:text-white"
                 >
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                  <Icon size={18} className="text-violet-300" />
+                  {label}
                 </Link>
               </li>
             ))}

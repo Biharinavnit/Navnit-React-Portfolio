@@ -1,87 +1,91 @@
+
 import React, { useState } from 'react';
-import { MessageCircle, X, Mic } from 'lucide-react';
+import { MessageCircle, X, Mic, Send, Bot } from 'lucide-react';
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
-
   const [messages, setMessages] = useState([
     {
-      text: "Hi 👋 I am Navnit's assistant. Ask about skills, projects or contact!",
+      text: "Hi! 👋 I'm Navnit's assistant. Ask me about skills, projects, resume, or contact.",
       sender: 'bot',
     },
   ]);
-
   const [input, setInput] = useState('');
+  const [listening, setListening] = useState(false);
 
-  // ✅ Scroll to section
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
+      block: 'start',
     });
   };
 
-  // ✅ Smart Reply System
   const getReply = (text) => {
     const msg = text.toLowerCase();
 
     if (msg.includes('skill') || msg.includes('tech')) {
       scrollToSection('skills');
-      return 'Navnit works with MERN stack, Java, Python and modern web technologies 💻';
+      return 'Navnit works with the MERN stack, Java, and modern web technologies. Visit the Technical Skills section for details. 💻';
     }
 
     if (msg.includes('project') || msg.includes('work')) {
       scrollToSection('projects');
-      return 'Check out projects like AI Assistant, Watch Party, E-commerce and Face Recognition 🚀';
+      return 'Explore Navnit’s projects, including the Job Application Tracker, Doctor Appointment System, AI Assistant, Weather App, and more. 🚀';
     }
 
-    if (msg.includes('contact') || msg.includes('hire')) {
+    if (msg.includes('contact') || msg.includes('hire') || msg.includes('email')) {
       scrollToSection('contact');
-      return 'You can contact Navnit via email, LinkedIn or GitHub 📩';
+      return 'You can reach Navnit by email or connect through LinkedIn and GitHub. The Contact section has the details. 📩';
     }
 
-    if (msg.includes('resume')) {
-      return 'You can view or download the resume from the hero section 📄';
+    if (msg.includes('resume') || msg.includes('cv')) {
+      scrollToSection('home');
+      return 'You can open Navnit’s resume using the View Resume button in the Home section. 📄';
     }
 
-    if (msg.includes('hello') || msg.includes('hi')) {
-      return 'Hello 👋 Welcome to Navnit’s portfolio website!';
+    if (msg.includes('about') || msg.includes('education') || msg.includes('internship')) {
+      scrollToSection('about');
+      return 'Navnit is a Computer Science Engineering graduate from Galgotias University and completed a MERN Full Stack Developer internship at EduSkills Academy.';
     }
 
-    return 'Try asking about skills, projects, resume or contact 😊';
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+      return 'Hello! 👋 Welcome to Navnit’s portfolio. What would you like to know?';
+    }
+
+    return 'Try asking about skills, projects, resume, education, internship, or contact. 😊';
   };
 
-  // ✅ Send Message
   const handleSend = () => {
-    if (!input.trim()) return;
+    const text = input.trim();
+    if (!text) return;
 
-    const userMessage = {
-      text: input,
-      sender: 'user',
-    };
+    const reply = getReply(text);
 
-    const botMessage = {
-      text: getReply(input),
-      sender: 'bot',
-    };
-
-    setMessages((prev) => [...prev, userMessage, botMessage]);
+    setMessages((previous) => [
+      ...previous,
+      { text, sender: 'user' },
+      { text: reply, sender: 'bot' },
+    ]);
 
     setInput('');
   };
 
-  // ✅ Voice Recognition (SAFE VERSION)
   const handleVoice = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      alert('Voice recognition is not supported in this browser');
+      window.alert('Voice recognition is not supported in this browser.');
       return;
     }
 
     const recognition = new SpeechRecognition();
+    recognition.lang = 'en-IN';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
 
-    recognition.start();
+    recognition.onstart = () => setListening(true);
+    recognition.onend = () => setListening(false);
 
     recognition.onresult = (event) => {
       const voiceText = event.results[0][0].transcript;
@@ -89,81 +93,121 @@ const ChatBot = () => {
     };
 
     recognition.onerror = () => {
-      alert('Voice recognition failed');
+      setListening(false);
+      window.alert('Voice recognition failed. Please try again.');
     };
+
+    recognition.start();
   };
 
   return (
     <>
-      {/* ✅ Floating Chat Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 bg-blue-500 hover:bg-blue-600 p-4 rounded-full shadow-lg text-white z-50 transition duration-300"
-      >
-        {open ? <X /> : <MessageCircle />}
-      </button>
-
-      {/* ✅ Chat Window */}
       {open && (
-        <div className="fixed bottom-20 right-6 w-80 bg-gradient-to-r from-[#0B1026] via-[#111827] to-[#1E1B4B] text-white rounded-2xl shadow-2xl p-4 z-50 border border-white/10 animate-fade-in">
+        <div className="fixed bottom-24 right-4 z-[60] flex h-[min(500px,calc(100dvh-8rem))] w-[min(370px,calc(100vw-2rem))] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0b1020]/95 text-white shadow-2xl shadow-black/50 backdrop-blur-2xl sm:bottom-24 sm:right-6">
+          <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-violet-600/20 to-fuchsia-500/10 p-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-300/20 bg-violet-500/15 text-violet-300">
+                <Bot size={22} />
+              </span>
+              <div>
+                <h2 className="font-bold text-white">Navnit AI Assistant</h2>
+                <p className="mt-0.5 text-xs text-slate-400">
+                  Portfolio guide
+                </p>
+              </div>
+            </div>
 
-          {/* Header */}
-          <div className="text-center mb-3">
-            <h2 className="font-bold text-lg text-blue-400">
-              Navnit AI Assistant 🤖
-            </h2>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close chatbot"
+              className="rounded-lg p-2 text-slate-400 transition hover:bg-white/10 hover:text-white"
+            >
+              <X size={19} />
+            </button>
           </div>
 
-          {/* Messages */}
-          <div className="h-64 overflow-y-auto mb-3 space-y-3 pr-1">
-            {messages.map((msg, idx) => (
+          <div
+            className="flex-1 space-y-3 overflow-y-auto p-4"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
+            {messages.map((message, index) => (
               <div
-                key={idx}
-                className={`p-3 rounded-xl text-sm max-w-[85%] break-words ${
-                  msg.sender === 'user'
-                    ? 'bg-blue-500 ml-auto'
-                    : 'bg-gray-700'
-                }`}
+                key={`${index}-${message.sender}`}
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {msg.text}
+                <div
+                  className={`max-w-[88%] whitespace-pre-wrap break-words rounded-2xl px-3.5 py-3 text-sm leading-6 ${
+                    message.sender === 'user'
+                      ? 'rounded-br-md bg-violet-600 text-white'
+                      : 'rounded-bl-md border border-white/[0.07] bg-white/[0.06] text-slate-200'
+                  }`}
+                >
+                  {message.text}
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Input Area */}
-          <div className="flex gap-2">
+          <div className="border-t border-white/10 bg-black/10 p-3">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={input}
+                placeholder="Ask about my portfolio..."
+                aria-label="Chat message"
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && !event.nativeEvent.isComposing) {
+                    event.preventDefault();
+                    handleSend();
+                  }
+                }}
+                className="min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.05] px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-violet-400/50 focus:ring-2 focus:ring-violet-500/10"
+              />
 
-            {/* Input */}
-            <input
-              type="text"
-              value={input}
-              placeholder="Ask something..."
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === 'Enter' && handleSend()
-              }
-              className="flex-1 p-2 rounded-lg bg-gray-800 text-white outline-none border border-gray-700 focus:border-blue-500"
-            />
+              <button
+                type="button"
+                onClick={handleVoice}
+                aria-label={listening ? 'Listening' : 'Use voice input'}
+                title={listening ? 'Listening...' : 'Voice input'}
+                className={`flex h-11 w-10 shrink-0 items-center justify-center rounded-xl border transition ${
+                  listening
+                    ? 'border-rose-400/40 bg-rose-500/20 text-rose-300'
+                    : 'border-white/10 bg-white/[0.05] text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                <Mic size={18} />
+              </button>
 
-            {/* Voice Button */}
-            <button
-              onClick={handleVoice}
-              className="bg-green-500 hover:bg-green-600 px-3 rounded-lg transition"
-            >
-              <Mic size={18} />
-            </button>
-
-            {/* Send Button */}
-            <button
-              onClick={handleSend}
-              className="bg-blue-500 hover:bg-blue-600 px-4 rounded-lg transition"
-            >
-              Send
-            </button>
-
+              <button
+                type="button"
+                onClick={handleSend}
+                aria-label="Send message"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-600 text-white shadow-lg shadow-violet-950/30 transition hover:bg-violet-500"
+              >
+                <Send size={17} />
+              </button>
+            </div>
+            {listening && (
+              <p className="mt-2 text-xs text-violet-300">
+                Listening for your voice...
+              </p>
+            )}
           </div>
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-label={open ? 'Close chat assistant' : 'Open chat assistant'}
+        aria-expanded={open}
+        className="fixed bottom-5 right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-xl shadow-violet-950/40 transition duration-300 hover:-translate-y-1 hover:shadow-violet-500/20 sm:bottom-6 sm:right-6"
+      >
+        {open ? <X size={24} /> : <MessageCircle size={24} />}
+      </button>
     </>
   );
 };
